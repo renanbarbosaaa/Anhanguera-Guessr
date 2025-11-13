@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escola Guessr - Descubra o Local</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  
+    <div id="registrationScreen" class="screen active">
+        <div class="registration-container">
+            <div class="registration-card">
+                <div class="logo-container">
+                    <h1>Escola Guessr</h1>
+                    <p class="subtitle">Primeira Turma de DS - 2024</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="playerName">Seu Nome:</label>
+                    <input type="text" id="playerName" placeholder="Digite seu nome completo" maxlength="20">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="playerYear">Sua Série:</label>
+                        <select id="playerYear" class="form-select">
+                            <option value="">Selecione o ano</option>
+                            <option value="1">1º Ano</option>
+                            <option value="2">2º Ano</option>
+                            <option value="3">3º Ano</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="playerClass">Turma:</label>
+                        <select id="playerClass" class="form-select">
+                            <option value="">Selecione a turma</option>
+                            <option value="A">A</option>
+                            <option value="A">A ADM</option>
+                            <option value="B">B</option>
+                            <option value="B">B DS</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="selected-info">
+                    <div id="selectedName" class="hidden">👤 Nome: <span></span></div>
+                    <div id="selectedSerie" class="hidden">🎓 Série: <span></span></div>
+                </div>
+
+                <button id="startGameBtn" class="start-btn disabled" disabled>🎯 Iniciar Jogo</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="gameScreen" class="screen">
+        <div class="game-header">
+            <div class="player-display">
+                <span id="currentPlayerName"></span> - <span id="currentPlayerSerie"></span>
+            </div>
+            <div class="game-info">
+                <div class="timer">
+                    ⏱️ <span id="timer">30</span>s
+                </div>
+                <div class="score">
+                    🏆 <span id="score">0</span> pontos
+                </div>
+                <div class="round">
+                    📍 Rodada <span id="round">1</span>/5
+                </div>
+            </div>
+        </div>
+
+        <div class="game-container">
+            
+            <div class="main-photo">
+                <img id="currentPhoto" src="" alt="Foto do local">
+                <div class="photo-overlay">
+                    <div class="instruction">Onde foi tirada esta foto?</div>
+                </div>
+            </div>
+
+          
+            <div class="mini-map">
+                <div class="map-header">
+                    <h4>🗺️ Clique no mapa</h4>
+                </div>
+                <div class="map-container">
+                    <img id="schoolMap" src="plantas/planta-escola.jpg" alt="Planta da Escola">
+                    <div class="map-overlay" id="mapOverlay"></div>
+                </div>
+                <button id="confirmGuess" class="confirm-btn">✅ Confirmar Palpite</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="roundResultScreen" class="screen">
+        <div class="result-container">
+            <div class="result-card">
+                <div id="resultIcon" class="result-icon">🎯</div>
+                <h2 id="resultTitle">Resultado</h2>
+                <div id="resultMessage" class="result-message"></div>
+
+                <div class="round-stats">
+                    <div class="stat">
+                        <span class="stat-label">Pontos Ganhos:</span>
+                        <span id="pointsEarned" class="stat-value">+0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Pontuação Total:</span>
+                        <span id="totalScore" class="stat-value">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Próxima Rodada:</span>
+                        <span id="nextRoundNumber" class="stat-value">2/5</span>
+                    </div>
+                </div>
+
+                <button id="nextRoundBtn" class="next-round-btn">🎯 Próxima Rodada →</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="gameOverScreen" class="screen">
+        <div class="game-over-container">
+            <div class="game-over-card">
+                <div class="trophy">🏆</div>
+                <h1>Jogo Concluído!</h1>
+
+                <div class="final-stats">
+                    <div class="final-stat">
+                        <span class="final-label">Jogador:</span>
+                        <span id="finalPlayerName" class="final-value"></span>
+                    </div>
+                    <div class="final-stat">
+                        <span class="final-label">Série:</span>
+                        <span id="finalPlayerSerie" class="final-value"></span>
+                    </div>
+                    <div class="final-stat highlight">
+                        <span class="final-label">Pontuação Final:</span>
+                        <span id="finalScore" class="final-value">0</span>
+                    </div>
+                    <div class="final-stat">
+                        <span class="final-label">Desempenho:</span>
+                        <span id="performance" class="final-value">Incrível!</span>
+                    </div>
+                </div>
+
+                <div class="final-actions">
+                    <button id="playAgainBtn" class="play-again-btn">🔄 Jogar Novamente</button>
+                    <button id="changePlayerBtn" class="change-player-btn">👥 Trocar Jogador</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
