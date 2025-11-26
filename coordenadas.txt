@@ -1,0 +1,89 @@
+entrada portao
+x588 y228
+
+secretaria
+x440 y267
+
+sala dos professores
+x433 y295
+
+informatica
+x425 y379
+
+sala 9
+x450 y370
+
+diretoria
+x516 y280
+
+corredor inferior salas 1° anos
+x689 y223
+
+corredor superior bloco B
+x484 y221
+
+banheiro dos professores 2° andar
+x665 y291
+
+escada bloco principal
+x587 y238 
+
+porta patio
+x581 y346
+
+entrada corredor
+x580 y370
+
+escada bloco A
+x690 y345
+
+escada bloco B
+x475 y342
+
+mesa exterior proximo a escada bloco A
+x686 y419
+
+entrada bloco espanhol
+x701 y607
+
+escada bloco espanhol
+x848 y579
+
+andar superior bloco espanhol
+x778 y594
+
+cantina 
+x652 y690
+
+entrada biblioteca
+x598 y770
+
+portão garagem
+x572 y68
+
+saida quadra
+x438 y72
+
+lado esquerdo entrada
+x685 y202
+
+sala Adriana
+x653 y290
+
+lado de fora cozinha 
+x501 y614
+
+entrada bloco do bebedouro
+x410 y593
+
+escada bloco bebedouro
+x312 y576
+
+patio perto banheiro masculino
+x648 y613
+
+sala do gremio
+x539 y328
+
+sala andar superior bloco bebedouro
+x366 y630
