@@ -87,3 +87,12 @@ x539 y328
 
 sala andar superior bloco bebedouro
 x366 y630
+
+corredor secretaria
+x484 y221
+
+fundos da escola
+x666 y1007
+
+sala de video
+x666 y848
