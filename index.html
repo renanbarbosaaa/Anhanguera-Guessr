@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escola Guessr - Descubra o Local</title>
+    <title>Anhanguera Guessr - Descubra o Local</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
   
     <div id="registrationScreen" class="screen active">
         <div class="registration-container">
+            <div class="background-image"></div>
+            
             <div class="registration-card">
                 <div class="logo-container">
-                    <h1>Escola Guessr</h1>
+                    <h1>Anhanguera Guessr</h1>
                     <p class="subtitle">Primeira Turma de DS - 2024</p>
                 </div>
                 <div class="form-group">
@@ -34,9 +36,9 @@
                         <select id="playerClass" class="form-select">
                             <option value="">Selecione a turma</option>
                             <option value="A">A</option>
-                            <option value="A">A ADM</option>
+                            <option value="A ADM">A ADM</option>
                             <option value="B">B</option>
-                            <option value="B">B DS</option>
+                            <option value="B DS">B DS</option>
                             <option value="C">C</option>
                             <option value="D">D</option>
                             <option value="E">E</option>
@@ -48,7 +50,7 @@
                     <div id="selectedName" class="hidden">👤 Nome: <span></span></div>
                     <div id="selectedSerie" class="hidden">🎓 Série: <span></span></div>
                 </div>
-                <button id="startGameBtn" class="start-btn" disabled>🎯 Iniciar Jogo</button>
+                <button id="startGameBtn" class="start-btn disabled" disabled>🎯 Iniciar Jogo</button>
             </div>
         </div>
     </div>

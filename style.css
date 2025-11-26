@@ -28,18 +28,50 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #8B0000 0%, #000000 100%);
+    background: none; 
     overflow-y: auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Elemento de Fundo com Imagem, Desfoque e Máscara */
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('Imagens/portaoGaragem.jpg'); 
+    background-size: cover;
+    background-position: center;
+    z-index: -1; 
+    filter: blur(1px); 
+    mask-image: radial-gradient(ellipse at center, 
+        rgba(0,0,0,1) 50%, 
+        rgba(0,0,0,0.5) 75%, 
+        rgba(0,0,0,0) 100%
+    );
+    -webkit-mask-image: radial-gradient(ellipse at center, 
+        rgba(0,0,0,1) 50%, 
+        rgba(0,0,0,0.5) 75%, 
+        rgba(0,0,0,0) 100%
+    );
 }
 
 .registration-card {
-    background: linear-gradient(145deg, #1a1a1a, #2a0f0f);
+    /* MUDANÇA AQUI: Background com transparência (RGBA 0.9) */
+    background: rgba(26, 26, 26, 0.9); 
+    /* Efeito de desfoque de fundo */
+    backdrop-filter: blur(5px); 
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    /* Box Shadow mais sutil */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     width: 90%;
     max-width: 450px;
     text-align: center;
+    z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borda levemente transparente */
 }
 
 .logo-container h1 { color: #ff6b6b; margin-bottom: 5px; text-shadow: 0 0 10px rgba(255, 107, 107, 0.5); }
@@ -47,7 +79,15 @@ body {
 .form-group { margin-bottom: 15px; text-align: left; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 .form-group label { display: block; margin-bottom: 5px; color: #ccc; }
-input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #444; background: #333; color: #fff; }
+/* Ajuste nos inputs para manterem a opacidade */
+input, select { 
+    width: 100%; 
+    padding: 10px; 
+    border-radius: 8px; 
+    border: 1px solid #444; 
+    background: #333; 
+    color: #fff; 
+}
 .start-btn { width: 100%; padding: 15px; background: #ff6b6b; border: none; border-radius: 10px; color: #fff; font-size: 1.1em; cursor: pointer; margin-top: 20px; }
 .start-btn:disabled { background: #444; cursor: not-allowed; }
 
@@ -91,7 +131,7 @@ input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px soli
 .game-hud {
     position: fixed;
     top: 10px;
-    right: 20px; /* Joguei pra direita pra não bater no botão Sair */
+    right: 20px; 
     display: flex;
     gap: 15px;
     z-index: 10;
@@ -132,7 +172,6 @@ input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px soli
     position: fixed;
     bottom: 20px;
     right: 20px;
-    /* Tamanho INICIAL (Pequeno) */
     width: 200px; 
     height: auto;
     background: rgba(20, 20, 20, 0.9);
@@ -141,18 +180,14 @@ input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px soli
     border: 2px solid #555;
     z-index: 50;
     box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-    
-    /* Transição SUAVE para crescer */
     transition: width 0.4s ease, transform 0.4s ease;
-    transform-origin: bottom right; /* Cresce a partir do canto inferior direito */
-    
+    transform-origin: bottom right; 
     display: flex;
     flex-direction: column;
 }
 
-/* QUANDO O MOUSE PASSA EM CIMA (HOVER) */
 .mini-map-wrapper:hover {
-    width: 500px; /* Tamanho EXPANDIDO */
+    width: 500px; 
     z-index: 60;
     background: rgba(20, 20, 20, 1);
     border-color: #ff6b6b;
@@ -168,7 +203,6 @@ input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px soli
 .map-container {
     position: relative;
     width: 100%;
-    /* Altura automática baseada na imagem */
     height: auto; 
     background: #000;
     border-radius: 8px;
@@ -204,9 +238,7 @@ input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px soli
     cursor: pointer;
     opacity: 0.8;
 }
-/* Botão fica mais visível no hover */
 .mini-map-wrapper:hover .confirm-btn { opacity: 1; padding: 12px; }
-
 .confirm-btn:disabled { background: #444; color: #888; cursor: not-allowed; }
 
 /* Marcadores */
@@ -255,6 +287,6 @@ input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px soli
 
 @media (max-width: 600px) {
     .mini-map-wrapper { width: 150px; }
-    .mini-map-wrapper:hover { width: 320px; } /* Menor em celular */
+    .mini-map-wrapper:hover { width: 320px; } 
     .game-hud { flex-direction: column; gap: 5px; align-items: flex-end; }
 }
