@@ -48,7 +48,7 @@
                     <div id="selectedName" class="hidden">👤 Nome: <span></span></div>
                     <div id="selectedSerie" class="hidden">🎓 Série: <span></span></div>
                 </div>
-                <button id="startGameBtn" class="start-btn disabled" disabled>🎯 Iniciar Jogo</button>
+                <button id="startGameBtn" class="start-btn" disabled>🎯 Iniciar Jogo</button>
             </div>
         </div>
     </div>
@@ -60,6 +60,8 @@
                 <p>Onde esta foto foi tirada?</p>
             </div>
         </div>
+
+        <button id="exitGameBtn" class="exit-game-btn" title="Voltar ao Menu">🏠 Sair</button>
 
         <div class="game-hud">
             <div class="hud-item player-info">
@@ -77,9 +79,8 @@
         </div>
 
         <div class="mini-map-wrapper" id="miniMapWrapper">
-            <div class="map-controls">
-                <h4>🗺️ Mapa</h4>
-                <button id="toggleMapBtn" class="toggle-map-btn" title="Expandir Mapa">🔍</button>
+            <div class="map-header-small">
+                <span>🗺️ Passe o mouse para ampliar</span>
             </div>
             
             <div class="map-container">
@@ -141,7 +142,7 @@
                 </div>
                 <div class="final-actions">
                     <button id="playAgainBtn" class="play-again-btn">🔄 Jogar Novamente</button>
-                    <button id="changePlayerBtn" class="change-player-btn">👥 Trocar Jogador</button>
+                    <button id="backToMenuBtn" class="change-player-btn">🏠 Voltar ao Menu</button>
                 </div>
             </div>
         </div>

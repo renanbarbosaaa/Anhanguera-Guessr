@@ -9,7 +9,7 @@ body {
     background-color: #000;
     min-height: 100vh;
     color: #fff;
-    overflow: hidden; /* Evita barras de rolagem no jogo */
+    overflow: hidden; 
 }
 
 .screen {
@@ -53,7 +53,6 @@ input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px soli
 
 /* ===== TELA DO JOGO (LAYOUT NOVO) ===== */
 
-/* 1. Foto Panorâmica de Fundo */
 .panorama-container {
     position: fixed;
     top: 0;
@@ -66,7 +65,7 @@ input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px soli
 #currentPhoto {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Garante que preencha a tela sem esticar */
+    object-fit: cover;
     display: block;
 }
 
@@ -88,100 +87,99 @@ input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px soli
     100% { opacity: 0; }
 }
 
-/* 2. HUD (Score e Timer no Topo) */
+/* HUD (Score e Timer) */
 .game-hud {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    top: 10px;
+    right: 20px; /* Joguei pra direita pra não bater no botão Sair */
     display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 10px;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
-    z-index: 2;
-    flex-wrap: wrap;
+    gap: 15px;
+    z-index: 10;
 }
 
 .hud-item {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 5px 15px;
-    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 8px 15px;
+    border-radius: 20px;
     font-weight: bold;
     backdrop-filter: blur(5px);
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 0.9em;
 }
 
 .timer-info span { color: #00ff00; }
 .timer-info span.warning { color: #ff6b6b; animation: pulse 1s infinite; }
 
-/* 3. Mapa Flutuante (Canto Inferior Direito) */
+/* Botão Sair durante o jogo */
+.exit-game-btn {
+    position: fixed;
+    top: 10px;
+    left: 20px;
+    z-index: 100;
+    background: rgba(255, 0, 0, 0.7);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.exit-game-btn:hover { background: red; }
+
+/* ===== MAPA FLUTUANTE COM HOVER ===== */
 .mini-map-wrapper {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 300px; /* Tamanho inicial pequeno */
+    /* Tamanho INICIAL (Pequeno) */
+    width: 200px; 
     height: auto;
-    background: rgba(20, 20, 20, 0.95);
-    border-radius: 15px;
+    background: rgba(20, 20, 20, 0.9);
+    border-radius: 12px;
     padding: 10px;
-    border: 2px solid #444;
-    z-index: 100;
+    border: 2px solid #555;
+    z-index: 50;
     box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* Transição SUAVE para crescer */
+    transition: width 0.4s ease, transform 0.4s ease;
+    transform-origin: bottom right; /* Cresce a partir do canto inferior direito */
+    
     display: flex;
     flex-direction: column;
 }
 
-/* Estado Expandido do Mapa */
-.mini-map-wrapper.expanded {
-    width: 85vw;
-    height: 85vh;
-    bottom: 50%;
-    right: 50%;
-    transform: translate(50%, 50%);
-    z-index: 200;
+/* QUANDO O MOUSE PASSA EM CIMA (HOVER) */
+.mini-map-wrapper:hover {
+    width: 500px; /* Tamanho EXPANDIDO */
+    z-index: 60;
+    background: rgba(20, 20, 20, 1);
     border-color: #ff6b6b;
 }
 
-.map-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
+.map-header-small {
+    text-align: center;
+    font-size: 0.8em;
+    color: #aaa;
+    margin-bottom: 5px;
 }
-
-.toggle-map-btn {
-    background: #333;
-    border: 1px solid #555;
-    color: white;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.2em;
-}
-
-.toggle-map-btn:hover { background: #ff6b6b; border-color: #ff6b6b; }
 
 .map-container {
     position: relative;
     width: 100%;
-    flex-grow: 1; /* Ocupa o espaço disponível */
+    /* Altura automática baseada na imagem */
+    height: auto; 
     background: #000;
     border-radius: 8px;
     overflow: hidden;
     cursor: crosshair;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 #schoolMap {
     width: 100%;
-    height: 100%;
-    object-fit: contain; /* Importante para manter a proporção */
     display: block;
+    height: auto;
 }
 
 #mapOverlay {
@@ -191,36 +189,40 @@ input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px soli
     width: 100%;
     height: 100%;
     z-index: 5;
-    pointer-events: none; /* ESSENCIAL para o clique funcionar */
+    pointer-events: none;
 }
 
 .confirm-btn {
     width: 100%;
     margin-top: 10px;
-    padding: 12px;
+    padding: 10px;
     background: #00ff00;
     color: #000;
     border: none;
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
+    opacity: 0.8;
 }
+/* Botão fica mais visível no hover */
+.mini-map-wrapper:hover .confirm-btn { opacity: 1; padding: 12px; }
+
 .confirm-btn:disabled { background: #444; color: #888; cursor: not-allowed; }
 
 /* Marcadores */
 .marker {
-    width: 16px; /* Tamanho fixo do marcador */
-    height: 16px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     position: absolute;
-    transform: translate(-50%, -50%); /* Centraliza no ponto exato */
+    transform: translate(-50%, -50%);
     z-index: 10;
-    box-shadow: 0 0 5px black;
+    box-shadow: 0 0 4px #000;
 }
 .marker.user { background: #ff6b6b; border: 2px solid white; }
 .marker.correct { background: #00ff00; border: 2px solid white; }
 
-/* Telas de Resultado e Game Over (Mantidas estilização básica) */
+/* Telas Finais */
 .result-container, .game-over-container {
     display: flex;
     justify-content: center;
@@ -237,11 +239,22 @@ input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px soli
     width: 90%;
     border: 1px solid #444;
 }
-.next-round-btn, .play-again-btn {
-    background: #ff6b6b; color: white; padding: 15px 30px; border: none; border-radius: 10px; margin-top: 20px; cursor: pointer; font-size: 1.1em;
+.next-round-btn, .play-again-btn, .change-player-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
 }
+.next-round-btn, .play-again-btn { background: #ff6b6b; color: white; }
+.change-player-btn { background: #444; color: white; }
+.change-player-btn:hover { background: #555; }
 
 @media (max-width: 600px) {
-    .mini-map-wrapper { width: 220px; bottom: 10px; right: 10px; }
-    .hud-item { font-size: 0.8em; padding: 5px 10px; }
+    .mini-map-wrapper { width: 150px; }
+    .mini-map-wrapper:hover { width: 320px; } /* Menor em celular */
+    .game-hud { flex-direction: column; gap: 5px; align-items: flex-end; }
 }

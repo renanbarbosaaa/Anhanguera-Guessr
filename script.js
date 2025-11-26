@@ -10,45 +10,46 @@ const gameConfig = {
     timeLeft: 30
 };
 
-// Banco de dados dos locais
-// NOTA: As coordenadas (correctPosition) abaixo são baseadas no tamanho ORIGINAL da imagem.
+// Banco de dados dos locais (Coordenadas baseadas na imagem original)
 const locations = [
-    { id: 1, name: "Entrada Portão", photo: "Imagens/entradaPrincipal.jpg", correctPosition: { x: 588, y: 228 }, radius: 30 },
+    { id: 1, name: "Entrada porta principal", photo: "Imagens/entradaPrincipal.jpg", correctPosition: { x: 588, y: 228 }, radius: 30 },
     { id: 2, name: "Secretaria", photo: "Imagens/secretaria.jpg", correctPosition: { x: 440, y: 267 }, radius: 30 },
     { id: 3, name: "Sala dos Professores", photo: "Imagens/salaProfs.jpg", correctPosition: { x: 433, y: 295 }, radius: 30 },
     { id: 4, name: "Informática", photo: "Imagens/informatica.jpg", correctPosition: { x: 425, y: 379 }, radius: 30 },
-    { id: 5, name: "Sala 9", photo: "Imagens/sala9.jpg", correctPosition: { x: 450, y: 370 }, radius: 30 },
+    { id: 5, name: "Sala 9 - Informática", photo: "Imagens/sala9.jpg", correctPosition: { x: 450, y: 370 }, radius: 30 },
     { id: 6, name: "Diretoria", photo: "Imagens/diretoria.jpg", correctPosition: { x: 516, y: 280 }, radius: 30 },
     { id: 7, name: "Corredor Inferior", photo: "Imagens/corredorInferior.jpg", correctPosition: { x: 689, y: 223 }, radius: 30 },
-    { id: 8, name: "Corredor Superior B", photo: "Imagens/corredorBlocoB.jpg", correctPosition: { x: 484, y: 221 }, radius: 30 },
-    { id: 9, name: "Banheiro Profs (2º)", photo: "Imagens/banheiroProfs.jpg", correctPosition: { x: 665, y: 291 }, radius: 30 },
+    { id: 8, name: "Corredor Superior Bloco B", photo: "Imagens/corredorBlocoB.jpg", correctPosition: { x: 484, y: 221 }, radius: 30 },
+    { id: 9, name: "Banheiro Professores (2º Andar)", photo: "Imagens/banheiroProfs.jpg", correctPosition: { x: 665, y: 291 }, radius: 30 },
     { id: 10, name: "Escada Principal", photo: "Imagens/escadaBlocoPrincipal.jpg", correctPosition: { x: 587, y: 238 }, radius: 30 },
-    { id: 11, name: "Porta Pátio", photo: "Imagens/portaRefeitorio.jpg", correctPosition: { x: 581, y: 346 }, radius: 30 },
-    { id: 12, name: "Entrada Corredor", photo: "Imagens/corredorRefeitorio.jpg", correctPosition: { x: 580, y: 370 }, radius: 30 },
+    { id: 11, name: "Porta  da entrada para o pátio", photo: "Imagens/portaRefeitorio.jpg", correctPosition: { x: 581, y: 346 }, radius: 30 },
+    { id: 12, name: "Entrada do corredor pátio", photo: "Imagens/corredorRefeitorio.jpg", correctPosition: { x: 580, y: 370 }, radius: 30 },
     { id: 13, name: "Escada Bloco A", photo: "Imagens/escadaBlocoA.jpg", correctPosition: { x: 690, y: 345 }, radius: 30 },
     { id: 14, name: "Escada Bloco B", photo: "Imagens/escadaBlocoB.jpg", correctPosition: { x: 475, y: 342 }, radius: 30 },
-    { id: 15, name: "Mesa Exterior", photo: "Imagens/mesaExterior.jpg", correctPosition: { x: 686, y: 419 }, radius: 30 },
-    { id: 16, name: "Entrada Espanhol", photo: "Imagens/entradaBlocoEspanhol.jpg", correctPosition: { x: 701, y: 607 }, radius: 30 },
-    { id: 17, name: "Escada Espanhol", photo: "Imagens/escadaBlocoEspanhol.jpg", correctPosition: { x: 848, y: 579 }, radius: 30 },
-    { id: 18, name: "Sup. Espanhol", photo: "Imagens/andarSupEspanhol.jpg", correctPosition: { x: 778, y: 594 }, radius: 30 },
+    { id: 15, name: "Mesa exterior perto da escada bloco A", photo: "Imagens/mesaExterior.jpg", correctPosition: { x: 686, y: 419 }, radius: 30 },
+    { id: 16, name: "Entrada para o bloco de espanhol", photo: "Imagens/entradaBlocoEspanhol.jpg", correctPosition: { x: 701, y: 607 }, radius: 30 },
+    { id: 17, name: "Escada do bloco de espanhol", photo: "Imagens/escadaBlocoEspanhol.jpg", correctPosition: { x: 848, y: 579 }, radius: 30 },
+    { id: 18, name: "Piso superior bloco de espanhol", photo: "Imagens/andarSupEspanhol.jpg", correctPosition: { x: 778, y: 594 }, radius: 30 },
     { id: 19, name: "Cantina", photo: "Imagens/cantina.jpg", correctPosition: { x: 652, y: 690 }, radius: 30 },
-    { id: 20, name: "Entrada Biblioteca", photo: "Imagens/entradaBiblioteca.jpg", correctPosition: { x: 598, y: 770 }, radius: 30 },
-    { id: 21, name: "Portão Garagem", photo: "Imagens/portaoGaragem.jpg", correctPosition: { x: 572, y: 68 }, radius: 30 },
-    { id: 22, name: "Saída Quadra", photo: "Imagens/saidaQuadra.jpg", correctPosition: { x: 438, y: 72 }, radius: 30 },
-    { id: 23, name: "Lado Esq Entrada", photo: "Imagens/ladoEsqEntradaPrincipal.jpg", correctPosition: { x: 685, y: 202 }, radius: 30 },
-    { id: 24, name: "Sala Adriana", photo: "Imagens/salaAdriana.jpg", correctPosition: { x: 653, y: 290 }, radius: 30 },
-    { id: 25, name: "Frente Cozinha", photo: "Imagens/frenteCozinha.jpg", correctPosition: { x: 501, y: 614 }, radius: 30 },
-    { id: 26, name: "Entrada Bebedouro", photo: "Imagens/entradaBlocoBebedouro.jpg", correctPosition: { x: 410, y: 593 }, radius: 30 },
-    { id: 27, name: "Escada Bebedouro", photo: "Imagens/escadaBlocoBebedouro.jpg", correctPosition: { x: 312, y: 576 }, radius: 30 },
-    { id: 28, name: "Pátio (Banheiro)", photo: "Imagens/patio.jpg", correctPosition: { x: 648, y: 613 }, radius: 30 },
+    { id: 20, name: "Entrada para sala de vídeo/biblioteca", photo: "Imagens/entradaBiblioteca.jpg", correctPosition: { x: 598, y: 770 }, radius: 30 },
+    { id: 21, name: "Portão garagem", photo: "Imagens/portaoGaragem.jpg", correctPosition: { x: 572, y: 68 }, radius: 30 },
+    { id: 22, name: "Saída da quadra", photo: "Imagens/saidaQuadra.jpg", correctPosition: { x: 438, y: 72 }, radius: 30 },
+    { id: 23, name: "Lado esquerdo da entrada", photo: "Imagens/ladoEsqEntradaPrincipal.jpg", correctPosition: { x: 685, y: 202 }, radius: 30 },
+    { id: 24, name: "Sala da coordenação", photo: "Imagens/salaAdriana.jpg", correctPosition: { x: 653, y: 290 }, radius: 30 },
+    { id: 25, name: "Frente da cozinha", photo: "Imagens/frenteCozinha.jpg", correctPosition: { x: 501, y: 614 }, radius: 30 },
+    { id: 26, name: "Entrada do bloco perto do bebedouro", photo: "Imagens/entradaBlocoBebedouro.jpg", correctPosition: { x: 410, y: 593 }, radius: 30 },
+    { id: 27, name: "Escada do bloco do bebedouro", photo: "Imagens/escadaBlocoBebedouro.jpg", correctPosition: { x: 312, y: 576 }, radius: 30 },
+    { id: 28, name: "Pátio ( perto do banheiro)", photo: "Imagens/patio.jpg", correctPosition: { x: 648, y: 613 }, radius: 30 },
     { id: 29, name: "Sala do Grêmio", photo: "Imagens/salaGremio.jpg", correctPosition: { x: 539, y: 328 }, radius: 30 },
-    { id: 30, name: "Sup. Bebedouro", photo: "Imagens/salaAndarSupBebedouro.jpg", correctPosition: { x: 366, y: 630 }, radius: 30 }
+    { id: 30, name: "Sala de vídeo", photo: "Imagens/salaVideo.jpg", correctPosition: { x: 666, y: 848 }, radius: 30 },
+    { id: 31, name: "Fundos da escola", photo: "Imagens/fundoEscola.jpg", correctPosition: { x: 666, y: 1007 }, radius: 30 },
+    { id: 32, name: "Corredor secretaria", photo: "Imagens/corredorSecretaria.jpg", correctPosition: { x: 484, y: 221 }, radius: 30 }
 ];
 
 // Variáveis globais
 let currentLocation = null;
 let usedLocations = [];
-let userGuess = null; // Armazena { x, y } baseados no tamanho ORIGINAL da imagem
+let userGuess = null; // Armazena em PORCENTAGEM agora: { xPct: 50, yPct: 50 }
 let currentTimer = null;
 
 // Elementos DOM
@@ -77,12 +78,12 @@ const elements = {
     
     // Mapa e Controles
     miniMapWrapper: document.getElementById('miniMapWrapper'),
-    toggleMapBtn: document.getElementById('toggleMapBtn'),
     schoolMap: document.getElementById('schoolMap'),
     mapOverlay: document.getElementById('mapOverlay'),
     confirmGuess: document.getElementById('confirmGuess'),
+    exitGameBtn: document.getElementById('exitGameBtn'), // Botão Sair
     
-    // Resultados e Finais
+    // Resultados
     resultIcon: document.getElementById('resultIcon'),
     resultTitle: document.getElementById('resultTitle'),
     resultMessage: document.getElementById('resultMessage'),
@@ -95,7 +96,7 @@ const elements = {
     finalScore: document.getElementById('finalScore'),
     performance: document.getElementById('performance'),
     playAgainBtn: document.getElementById('playAgainBtn'),
-    changePlayerBtn: document.getElementById('changePlayerBtn')
+    backToMenuBtn: document.getElementById('backToMenuBtn') // Botão Menu Final
 };
 
 function init() {
@@ -112,37 +113,17 @@ function setupEventListeners() {
     // Jogo
     elements.schoolMap.addEventListener('click', handleMapClick); 
     elements.confirmGuess.addEventListener('click', confirmGuess);
-    elements.toggleMapBtn.addEventListener('click', toggleMapSize); // Botão de expandir
+    elements.exitGameBtn.addEventListener('click', exitToMenu);
     
     // Navegação
     elements.nextRoundBtn.addEventListener('click', nextRound);
     elements.playAgainBtn.addEventListener('click', playAgain);
-    elements.changePlayerBtn.addEventListener('click', changePlayer);
+    elements.backToMenuBtn.addEventListener('click', exitToMenu);
 }
 
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(screenId).classList.add('active');
-}
-
-// Lógica de Expandir/Minimizar Mapa
-function toggleMapSize() {
-    elements.miniMapWrapper.classList.toggle('expanded');
-    const btn = elements.toggleMapBtn;
-    
-    // Ajustar o marcador visualmente se já houver um palpite
-    if (userGuess) {
-        // Pequeno atraso para esperar a transição CSS terminar e recalcular posições
-        setTimeout(() => redrawUserMarker(), 350);
-    }
-
-    if (elements.miniMapWrapper.classList.contains('expanded')) {
-        btn.textContent = '❌';
-        btn.title = "Minimizar Mapa";
-    } else {
-        btn.textContent = '🔍';
-        btn.title = "Expandir Mapa";
-    }
 }
 
 // Cadastro
@@ -188,22 +169,12 @@ function startGame() {
 function startRound() {
     showScreen('gameScreen');
     
-    // Resetar estado
     userGuess = null;
     elements.confirmGuess.disabled = true;
     elements.mapOverlay.innerHTML = '';
-    // Minimizar mapa ao começar nova rodada
-    elements.miniMapWrapper.classList.remove('expanded'); 
-    elements.toggleMapBtn.textContent = '🔍';
     
     const available = locations.filter(loc => !usedLocations.includes(loc.id));
-    if (available.length === 0) {
-        // Se acabarem as locations, reinicia usadas (ou termina o jogo, dependendo da lógica desejada)
-        // Por enquanto, vamos permitir repetição se necessário, ou garantir que totalRounds <= locations.length
-    }
-    
-    // Seleciona aleatório
-    if(available.length > 0) {
+    if (available.length > 0) {
         currentLocation = available[Math.floor(Math.random() * available.length)];
     } else {
         currentLocation = locations[Math.floor(Math.random() * locations.length)];
@@ -237,7 +208,7 @@ function startTimer() {
 
 function timeUp() {
     if (!userGuess) {
-        userGuess = { x: -1000, y: -1000 }; // Fora do mapa
+        userGuess = null; 
         showRoundResult(false, 9999, 0); 
     } else {
         confirmGuess();
@@ -245,7 +216,7 @@ function timeUp() {
 }
 
 // =========================================================
-// CORREÇÃO CRÍTICA: CÁLCULO DE ESCALA DO MAPA
+// LÓGICA DE CLIQUE COM PORCENTAGEM (Para funcionar com o zoom)
 // =========================================================
 
 function handleMapClick(event) {
@@ -254,77 +225,63 @@ function handleMapClick(event) {
     const img = elements.schoolMap;
     const rect = img.getBoundingClientRect();
     
-    // 1. Pega onde clicou na TELA (pixels visuais)
+    // Pega onde clicou na TELA (pixels visuais)
     const clickVisualX = event.clientX - rect.left;
     const clickVisualY = event.clientY - rect.top;
     
-    // 2. Calcula a proporção entre o tamanho VISUAL e o tamanho ORIGINAL da imagem
-    // (NaturalWidth é o tamanho real do arquivo PNG, Rect.width é o tamanho que o CSS está mostrando)
-    const scaleX = img.naturalWidth / rect.width;
-    const scaleY = img.naturalHeight / rect.height;
+    // Converte para PORCENTAGEM
+    const pctX = (clickVisualX / rect.width) * 100;
+    const pctY = (clickVisualY / rect.height) * 100;
     
-    // 3. Converte o clique visual para a coordenada "real" do banco de dados
-    const realX = clickVisualX * scaleX;
-    const realY = clickVisualY * scaleY;
+    // Salva em porcentagem
+    userGuess = { xPct: pctX, yPct: pctY };
     
-    // Salva o palpite nas coordenadas REAIS (para comparar com o DB depois)
-    userGuess = { x: realX, y: realY };
-    
-    // Desenha o marcador visualmente onde a pessoa clicou
-    drawMarker(clickVisualX, clickVisualY, 'user');
+    // Desenha marcador usando porcentagem (assim ele acompanha o zoom do mapa)
+    drawMarkerPercentage(pctX, pctY, 'user');
     
     elements.confirmGuess.disabled = false;
 }
 
-// Função auxiliar para desenhar o marcador na tela
-function drawMarker(visualX, visualY, type) {
-    elements.mapOverlay.innerHTML = ''; // Limpa anteriores
+function drawMarkerPercentage(leftPct, topPct, type) {
+    elements.mapOverlay.innerHTML = '';
     const marker = document.createElement('div');
     marker.className = `marker ${type}`;
-    marker.style.left = `${visualX}px`;
-    marker.style.top = `${visualY}px`;
+    // Importante: Usa % para posicionar
+    marker.style.left = `${leftPct}%`;
+    marker.style.top = `${topPct}%`;
     elements.mapOverlay.appendChild(marker);
 }
 
-// Se o mapa for redimensionado (expandir/minimizar), precisamos redesenhar o marcador no lugar certo
-function redrawUserMarker() {
-    if(!userGuess) return;
-    
-    const img = elements.schoolMap;
-    const rect = img.getBoundingClientRect();
-    
-    // Faz o processo inverso: Pega a coordenada REAL e transforma em VISUAL
-    const scaleX = rect.width / img.naturalWidth;
-    const scaleY = rect.height / img.naturalHeight;
-    
-    const visualX = userGuess.x * scaleX;
-    const visualY = userGuess.y * scaleY;
-    
-    drawMarker(visualX, visualY, 'user');
-}
-
 function confirmGuess() {
-    if (!userGuess || gameConfig.timeLeft <= 0 && !userGuess) return;
+    if (!userGuess && gameConfig.timeLeft > 0) return;
     clearInterval(currentTimer);
     
-    // Calcula distância usando as coordenadas REAIS (do banco de dados)
-    const distance = calculateDistance(
-        userGuess.x, userGuess.y,
-        currentLocation.correctPosition.x,
-        currentLocation.correctPosition.y
-    );
-    
-    // Pontuação
-    const maxScore = 1000;
-    const maxErrorDistance = 200; // Pixels originais de tolerância
     let points = 0;
-    
-    const isPerfect = distance <= currentLocation.radius;
-    
-    if (isPerfect) {
-        points = maxScore;
-    } else if (distance < maxErrorDistance) {
-        points = Math.round(maxScore * (1 - (distance / maxErrorDistance)));
+    let distance = 9999;
+    let isPerfect = false;
+
+    if (userGuess) {
+        // Converte a porcentagem do clique para pixels REAIS da imagem original para calcular a distância
+        const img = elements.schoolMap;
+        const realClickX = (userGuess.xPct / 100) * img.naturalWidth;
+        const realClickY = (userGuess.yPct / 100) * img.naturalHeight;
+        
+        distance = calculateDistance(
+            realClickX, realClickY,
+            currentLocation.correctPosition.x,
+            currentLocation.correctPosition.y
+        );
+        
+        const maxScore = 1000;
+        const maxErrorDistance = 200; 
+        
+        isPerfect = distance <= currentLocation.radius;
+        
+        if (isPerfect) {
+            points = maxScore;
+        } else if (distance < maxErrorDistance) {
+            points = Math.round(maxScore * (1 - (distance / maxErrorDistance)));
+        }
     }
     
     gameConfig.score += points;
@@ -338,11 +295,6 @@ function calculateDistance(x1, y1, x2, y2) {
 function showRoundResult(isPerfect, distance, pointsEarned) {
     showScreen('roundResultScreen');
     
-    // Precisamos mostrar o mapa na tela de resultado também?
-    // O design atual não mostra mapa na tela de resultado, apenas texto.
-    // Se quiser mostrar onde era, teríamos que clonar o mapa para lá.
-    // Por enquanto, vamos manter o texto.
-    
     if (pointsEarned === 1000) {
         elements.resultIcon.textContent = '🎯';
         elements.resultTitle.textContent = 'NA MOSCA!';
@@ -351,7 +303,7 @@ function showRoundResult(isPerfect, distance, pointsEarned) {
     } else if (pointsEarned > 0) {
         elements.resultIcon.textContent = '👍';
         elements.resultTitle.textContent = 'Foi Perto!';
-        elements.resultMessage.innerHTML = `<p>Local: <b>${currentLocation.name}</b></p><p>Erro: ${Math.round(distance)}m (aprox)</p>`;
+        elements.resultMessage.innerHTML = `<p>Local: <b>${currentLocation.name}</b></p><p>Erro: ${Math.round(distance)}px</p>`;
         elements.pointsEarned.style.color = '#ffff00';
     } else {
         elements.resultIcon.textContent = '❌';
@@ -399,14 +351,28 @@ function playAgain() {
     startRound();
 }
 
-function changePlayer() {
-    if (currentTimer) clearInterval(currentTimer);
-    showScreen('registrationScreen');
-    elements.playerName.value = '';
-    elements.playerYear.value = '';
-    elements.playerClass.value = '';
-    elements.playerClass.disabled = true;
-    updateStartButton();
+// Função para Voltar ao Menu (Reseta tudo)
+function exitToMenu() {
+    if (confirm("Tem certeza que deseja sair? O progresso será perdido.")) {
+        if (currentTimer) clearInterval(currentTimer);
+        
+        // Reseta dados do jogo
+        gameConfig.currentRound = 1;
+        gameConfig.score = 0;
+        usedLocations = [];
+        userGuess = null;
+        
+        // Limpa campos do cadastro
+        elements.playerName.value = '';
+        elements.playerYear.value = '';
+        elements.playerClass.value = '';
+        elements.playerClass.disabled = true;
+        elements.selectedName.classList.add('hidden');
+        elements.selectedSerie.classList.add('hidden');
+        elements.startGameBtn.disabled = true;
+        
+        showScreen('registrationScreen');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', init);
