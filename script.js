@@ -1,6 +1,6 @@
 // Configuração do jogo
 const gameConfig = {
-    totalRounds: 5,
+    totalRounds: 5, 
     currentRound: 1,
     score: 0,
     playerName: '',
@@ -11,48 +11,44 @@ const gameConfig = {
 };
 
 // Banco de dados dos locais
+// NOTA: As coordenadas (correctPosition) abaixo são baseadas no tamanho ORIGINAL da imagem.
 const locations = [
-    {
-        id: 1,
-        name: "Biblioteca",
-        photo: "fotos/biblioteca.jpg",
-        correctPosition: { x: 150, y: 80 },
-        radius: 30
-    },
-    {
-        id: 2,
-        name: "Quadra de Esportes",
-        photo: "fotos/quadra.jpg",
-        correctPosition: { x: 250, y: 180 },
-        radius: 40
-    },
-    {
-        id: 3,
-        name: "Cantina",
-        photo: "fotos/cantina.jpg",
-        correctPosition: { x: 100, y: 150 },
-        radius: 25
-    },
-    {
-        id: 4,
-        name: "Sala de Aula 101",
-        photo: "fotos/sala-aula.jpg",
-        correctPosition: { x: 200, y: 100 },
-        radius: 20
-    },
-    {
-        id: 5,
-        name: "Auditório",
-        photo: "fotos/auditorio.jpg",
-        correctPosition: { x: 180, y: 200 },
-        radius: 35
-    }
+    { id: 1, name: "Entrada Portão", photo: "Imagens/entradaPrincipal.jpg", correctPosition: { x: 588, y: 228 }, radius: 30 },
+    { id: 2, name: "Secretaria", photo: "Imagens/secretaria.jpg", correctPosition: { x: 440, y: 267 }, radius: 30 },
+    { id: 3, name: "Sala dos Professores", photo: "Imagens/salaProfs.jpg", correctPosition: { x: 433, y: 295 }, radius: 30 },
+    { id: 4, name: "Informática", photo: "Imagens/informatica.jpg", correctPosition: { x: 425, y: 379 }, radius: 30 },
+    { id: 5, name: "Sala 9", photo: "Imagens/sala9.jpg", correctPosition: { x: 450, y: 370 }, radius: 30 },
+    { id: 6, name: "Diretoria", photo: "Imagens/diretoria.jpg", correctPosition: { x: 516, y: 280 }, radius: 30 },
+    { id: 7, name: "Corredor Inferior", photo: "Imagens/corredorInferior.jpg", correctPosition: { x: 689, y: 223 }, radius: 30 },
+    { id: 8, name: "Corredor Superior B", photo: "Imagens/corredorBlocoB.jpg", correctPosition: { x: 484, y: 221 }, radius: 30 },
+    { id: 9, name: "Banheiro Profs (2º)", photo: "Imagens/banheiroProfs.jpg", correctPosition: { x: 665, y: 291 }, radius: 30 },
+    { id: 10, name: "Escada Principal", photo: "Imagens/escadaBlocoPrincipal.jpg", correctPosition: { x: 587, y: 238 }, radius: 30 },
+    { id: 11, name: "Porta Pátio", photo: "Imagens/portaRefeitorio.jpg", correctPosition: { x: 581, y: 346 }, radius: 30 },
+    { id: 12, name: "Entrada Corredor", photo: "Imagens/corredorRefeitorio.jpg", correctPosition: { x: 580, y: 370 }, radius: 30 },
+    { id: 13, name: "Escada Bloco A", photo: "Imagens/escadaBlocoA.jpg", correctPosition: { x: 690, y: 345 }, radius: 30 },
+    { id: 14, name: "Escada Bloco B", photo: "Imagens/escadaBlocoB.jpg", correctPosition: { x: 475, y: 342 }, radius: 30 },
+    { id: 15, name: "Mesa Exterior", photo: "Imagens/mesaExterior.jpg", correctPosition: { x: 686, y: 419 }, radius: 30 },
+    { id: 16, name: "Entrada Espanhol", photo: "Imagens/entradaBlocoEspanhol.jpg", correctPosition: { x: 701, y: 607 }, radius: 30 },
+    { id: 17, name: "Escada Espanhol", photo: "Imagens/escadaBlocoEspanhol.jpg", correctPosition: { x: 848, y: 579 }, radius: 30 },
+    { id: 18, name: "Sup. Espanhol", photo: "Imagens/andarSupEspanhol.jpg", correctPosition: { x: 778, y: 594 }, radius: 30 },
+    { id: 19, name: "Cantina", photo: "Imagens/cantina.jpg", correctPosition: { x: 652, y: 690 }, radius: 30 },
+    { id: 20, name: "Entrada Biblioteca", photo: "Imagens/entradaBiblioteca.jpg", correctPosition: { x: 598, y: 770 }, radius: 30 },
+    { id: 21, name: "Portão Garagem", photo: "Imagens/portaoGaragem.jpg", correctPosition: { x: 572, y: 68 }, radius: 30 },
+    { id: 22, name: "Saída Quadra", photo: "Imagens/saidaQuadra.jpg", correctPosition: { x: 438, y: 72 }, radius: 30 },
+    { id: 23, name: "Lado Esq Entrada", photo: "Imagens/ladoEsqEntradaPrincipal.jpg", correctPosition: { x: 685, y: 202 }, radius: 30 },
+    { id: 24, name: "Sala Adriana", photo: "Imagens/salaAdriana.jpg", correctPosition: { x: 653, y: 290 }, radius: 30 },
+    { id: 25, name: "Frente Cozinha", photo: "Imagens/frenteCozinha.jpg", correctPosition: { x: 501, y: 614 }, radius: 30 },
+    { id: 26, name: "Entrada Bebedouro", photo: "Imagens/entradaBlocoBebedouro.jpg", correctPosition: { x: 410, y: 593 }, radius: 30 },
+    { id: 27, name: "Escada Bebedouro", photo: "Imagens/escadaBlocoBebedouro.jpg", correctPosition: { x: 312, y: 576 }, radius: 30 },
+    { id: 28, name: "Pátio (Banheiro)", photo: "Imagens/patio.jpg", correctPosition: { x: 648, y: 613 }, radius: 30 },
+    { id: 29, name: "Sala do Grêmio", photo: "Imagens/salaGremio.jpg", correctPosition: { x: 539, y: 328 }, radius: 30 },
+    { id: 30, name: "Sup. Bebedouro", photo: "Imagens/salaAndarSupBebedouro.jpg", correctPosition: { x: 366, y: 630 }, radius: 30 }
 ];
 
 // Variáveis globais
 let currentLocation = null;
 let usedLocations = [];
-let userGuess = null;
+let userGuess = null; // Armazena { x, y } baseados no tamanho ORIGINAL da imagem
 let currentTimer = null;
 
 // Elementos DOM
@@ -78,11 +74,15 @@ const elements = {
     score: document.getElementById('score'),
     round: document.getElementById('round'),
     currentPhoto: document.getElementById('currentPhoto'),
+    
+    // Mapa e Controles
+    miniMapWrapper: document.getElementById('miniMapWrapper'),
+    toggleMapBtn: document.getElementById('toggleMapBtn'),
     schoolMap: document.getElementById('schoolMap'),
     mapOverlay: document.getElementById('mapOverlay'),
     confirmGuess: document.getElementById('confirmGuess'),
     
-    // Resultado
+    // Resultados e Finais
     resultIcon: document.getElementById('resultIcon'),
     resultTitle: document.getElementById('resultTitle'),
     resultMessage: document.getElementById('resultMessage'),
@@ -90,8 +90,6 @@ const elements = {
     totalScore: document.getElementById('totalScore'),
     nextRoundNumber: document.getElementById('nextRoundNumber'),
     nextRoundBtn: document.getElementById('nextRoundBtn'),
-    
-    // Final
     finalPlayerName: document.getElementById('finalPlayerName'),
     finalPlayerSerie: document.getElementById('finalPlayerSerie'),
     finalScore: document.getElementById('finalScore'),
@@ -100,23 +98,21 @@ const elements = {
     changePlayerBtn: document.getElementById('changePlayerBtn')
 };
 
-// Inicialização
 function init() {
     setupEventListeners();
     showScreen('registrationScreen');
 }
 
-// Configurar event listeners
 function setupEventListeners() {
-    // Cadastro
     elements.playerName.addEventListener('input', updateStartButton);
     elements.playerYear.addEventListener('change', handleYearChange);
     elements.playerClass.addEventListener('change', updateStartButton);
     elements.startGameBtn.addEventListener('click', startGame);
     
     // Jogo
-    elements.schoolMap.addEventListener('click', handleMapClick);
+    elements.schoolMap.addEventListener('click', handleMapClick); 
     elements.confirmGuess.addEventListener('click', confirmGuess);
+    elements.toggleMapBtn.addEventListener('click', toggleMapSize); // Botão de expandir
     
     // Navegação
     elements.nextRoundBtn.addEventListener('click', nextRound);
@@ -124,26 +120,36 @@ function setupEventListeners() {
     elements.changePlayerBtn.addEventListener('click', changePlayer);
 }
 
-// Mostrar tela específica
 function showScreen(screenId) {
-    document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
-    });
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(screenId).classList.add('active');
 }
 
-// ===== CADASTRO =====
+// Lógica de Expandir/Minimizar Mapa
+function toggleMapSize() {
+    elements.miniMapWrapper.classList.toggle('expanded');
+    const btn = elements.toggleMapBtn;
+    
+    // Ajustar o marcador visualmente se já houver um palpite
+    if (userGuess) {
+        // Pequeno atraso para esperar a transição CSS terminar e recalcular posições
+        setTimeout(() => redrawUserMarker(), 350);
+    }
+
+    if (elements.miniMapWrapper.classList.contains('expanded')) {
+        btn.textContent = '❌';
+        btn.title = "Minimizar Mapa";
+    } else {
+        btn.textContent = '🔍';
+        btn.title = "Expandir Mapa";
+    }
+}
+
+// Cadastro
 function handleYearChange() {
     const year = elements.playerYear.value;
-    
-    // Habilitar/desabilitar seleção de turma
-    if (year) {
-        elements.playerClass.disabled = false;
-    } else {
-        elements.playerClass.disabled = true;
-        elements.playerClass.value = '';
-    }
-    
+    elements.playerClass.disabled = !year;
+    if (!year) elements.playerClass.value = '';
     updateStartButton();
 }
 
@@ -154,9 +160,6 @@ function updateStartButton() {
     
     if (name && year && classLetter) {
         elements.startGameBtn.disabled = false;
-        elements.startGameBtn.classList.remove('disabled');
-        
-        // Atualizar informações selecionadas
         const serie = `${year}º${classLetter}`;
         elements.selectedName.classList.remove('hidden');
         elements.selectedName.querySelector('span').textContent = name;
@@ -164,53 +167,54 @@ function updateStartButton() {
         elements.selectedSerie.querySelector('span').textContent = serie;
     } else {
         elements.startGameBtn.disabled = true;
-        elements.startGameBtn.classList.add('disabled');
-        
-        // Esconder informações se não estiver completo
-        if (!name) elements.selectedName.classList.add('hidden');
-        if (!year || !classLetter) elements.selectedSerie.classList.add('hidden');
+        elements.selectedName.classList.add('hidden');
+        elements.selectedSerie.classList.add('hidden');
     }
 }
 
 function startGame() {
     const year = elements.playerYear.value;
     const classLetter = elements.playerClass.value;
-    
     gameConfig.playerName = elements.playerName.value.trim();
     gameConfig.playerSerie = `${year}º${classLetter}`;
     
-    // Atualizar display do jogador
     elements.currentPlayerName.textContent = gameConfig.playerName;
     elements.currentPlayerSerie.textContent = gameConfig.playerSerie;
     
     startRound();
 }
 
-// ===== JOGO =====
+// Início de Rodada
 function startRound() {
     showScreen('gameScreen');
     
-    // Resetar rodada
+    // Resetar estado
     userGuess = null;
     elements.confirmGuess.disabled = true;
     elements.mapOverlay.innerHTML = '';
+    // Minimizar mapa ao começar nova rodada
+    elements.miniMapWrapper.classList.remove('expanded'); 
+    elements.toggleMapBtn.textContent = '🔍';
     
-    // Selecionar local
-    const availableLocations = locations.filter(loc => !usedLocations.includes(loc.id));
-    if (availableLocations.length === 0) {
-        endGame();
-        return;
+    const available = locations.filter(loc => !usedLocations.includes(loc.id));
+    if (available.length === 0) {
+        // Se acabarem as locations, reinicia usadas (ou termina o jogo, dependendo da lógica desejada)
+        // Por enquanto, vamos permitir repetição se necessário, ou garantir que totalRounds <= locations.length
     }
     
-    currentLocation = availableLocations[Math.floor(Math.random() * availableLocations.length)];
+    // Seleciona aleatório
+    if(available.length > 0) {
+        currentLocation = available[Math.floor(Math.random() * available.length)];
+    } else {
+        currentLocation = locations[Math.floor(Math.random() * locations.length)];
+    }
+    
     usedLocations.push(currentLocation.id);
     
-    // Atualizar interface
     elements.currentPhoto.src = currentLocation.photo;
     elements.round.textContent = gameConfig.currentRound;
     elements.score.textContent = gameConfig.score;
     
-    // Iniciar timer
     startTimer();
 }
 
@@ -218,19 +222,12 @@ function startTimer() {
     gameConfig.timeLeft = gameConfig.timePerRound;
     elements.timer.textContent = gameConfig.timeLeft;
     elements.timer.classList.remove('warning');
-    
     if (currentTimer) clearInterval(currentTimer);
     
     currentTimer = setInterval(() => {
         gameConfig.timeLeft--;
         elements.timer.textContent = gameConfig.timeLeft;
-        
-        // Aviso visual nos últimos 10 segundos
-        if (gameConfig.timeLeft <= 10) {
-            elements.timer.classList.add('warning');
-        }
-        
-        // Tempo esgotado
+        if (gameConfig.timeLeft <= 10) elements.timer.classList.add('warning');
         if (gameConfig.timeLeft <= 0) {
             clearInterval(currentTimer);
             timeUp();
@@ -240,113 +237,136 @@ function startTimer() {
 
 function timeUp() {
     if (!userGuess) {
-        // Usuário não fez palpite - considerar como erro
-        userGuess = { x: -100, y: -100 }; // Fora do mapa
-        showRoundResult(false, 999);
+        userGuess = { x: -1000, y: -1000 }; // Fora do mapa
+        showRoundResult(false, 9999, 0); 
+    } else {
+        confirmGuess();
     }
 }
+
+// =========================================================
+// CORREÇÃO CRÍTICA: CÁLCULO DE ESCALA DO MAPA
+// =========================================================
 
 function handleMapClick(event) {
     if (gameConfig.timeLeft <= 0) return;
     
-    const rect = elements.schoolMap.getBoundingClientRect();
-    const clickX = event.clientX - rect.left;
-    const clickY = event.clientY - rect.top;
+    const img = elements.schoolMap;
+    const rect = img.getBoundingClientRect();
     
-    // Salvar palpite do usuário
-    userGuess = { x: clickX, y: clickY };
+    // 1. Pega onde clicou na TELA (pixels visuais)
+    const clickVisualX = event.clientX - rect.left;
+    const clickVisualY = event.clientY - rect.top;
     
-    // Mostrar marcador
-    elements.mapOverlay.innerHTML = '';
-    const marker = document.createElement('div');
-    marker.className = 'marker user';
-    marker.style.left = `${clickX}px`;
-    marker.style.top = `${clickY}px`;
-    elements.mapOverlay.appendChild(marker);
+    // 2. Calcula a proporção entre o tamanho VISUAL e o tamanho ORIGINAL da imagem
+    // (NaturalWidth é o tamanho real do arquivo PNG, Rect.width é o tamanho que o CSS está mostrando)
+    const scaleX = img.naturalWidth / rect.width;
+    const scaleY = img.naturalHeight / rect.height;
     
-    // Ativar botão de confirmar
+    // 3. Converte o clique visual para a coordenada "real" do banco de dados
+    const realX = clickVisualX * scaleX;
+    const realY = clickVisualY * scaleY;
+    
+    // Salva o palpite nas coordenadas REAIS (para comparar com o DB depois)
+    userGuess = { x: realX, y: realY };
+    
+    // Desenha o marcador visualmente onde a pessoa clicou
+    drawMarker(clickVisualX, clickVisualY, 'user');
+    
     elements.confirmGuess.disabled = false;
 }
 
-function confirmGuess() {
-    if (!userGuess || gameConfig.timeLeft <= 0) return;
+// Função auxiliar para desenhar o marcador na tela
+function drawMarker(visualX, visualY, type) {
+    elements.mapOverlay.innerHTML = ''; // Limpa anteriores
+    const marker = document.createElement('div');
+    marker.className = `marker ${type}`;
+    marker.style.left = `${visualX}px`;
+    marker.style.top = `${visualY}px`;
+    elements.mapOverlay.appendChild(marker);
+}
+
+// Se o mapa for redimensionado (expandir/minimizar), precisamos redesenhar o marcador no lugar certo
+function redrawUserMarker() {
+    if(!userGuess) return;
     
+    const img = elements.schoolMap;
+    const rect = img.getBoundingClientRect();
+    
+    // Faz o processo inverso: Pega a coordenada REAL e transforma em VISUAL
+    const scaleX = rect.width / img.naturalWidth;
+    const scaleY = rect.height / img.naturalHeight;
+    
+    const visualX = userGuess.x * scaleX;
+    const visualY = userGuess.y * scaleY;
+    
+    drawMarker(visualX, visualY, 'user');
+}
+
+function confirmGuess() {
+    if (!userGuess || gameConfig.timeLeft <= 0 && !userGuess) return;
     clearInterval(currentTimer);
     
-    // Calcular distância
+    // Calcula distância usando as coordenadas REAIS (do banco de dados)
     const distance = calculateDistance(
         userGuess.x, userGuess.y,
         currentLocation.correctPosition.x,
         currentLocation.correctPosition.y
     );
     
-    const isCorrect = distance <= currentLocation.radius;
-    const points = isCorrect ? 100 : 0;
+    // Pontuação
+    const maxScore = 1000;
+    const maxErrorDistance = 200; // Pixels originais de tolerância
+    let points = 0;
     
-    // Atualizar pontuação
+    const isPerfect = distance <= currentLocation.radius;
+    
+    if (isPerfect) {
+        points = maxScore;
+    } else if (distance < maxErrorDistance) {
+        points = Math.round(maxScore * (1 - (distance / maxErrorDistance)));
+    }
+    
     gameConfig.score += points;
-    
-    // Mostrar resultado
-    showRoundResult(isCorrect, distance);
+    showRoundResult(isPerfect, distance, points);
 }
 
 function calculateDistance(x1, y1, x2, y2) {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 }
 
-// ===== RESULTADOS =====
-function showRoundResult(isCorrect, distance) {
+function showRoundResult(isPerfect, distance, pointsEarned) {
     showScreen('roundResultScreen');
     
-    // Mostrar marcadores no mapa do resultado
-    elements.mapOverlay.innerHTML = '';
+    // Precisamos mostrar o mapa na tela de resultado também?
+    // O design atual não mostra mapa na tela de resultado, apenas texto.
+    // Se quiser mostrar onde era, teríamos que clonar o mapa para lá.
+    // Por enquanto, vamos manter o texto.
     
-    // Marcador do usuário
-    const userMarker = document.createElement('div');
-    userMarker.className = `marker ${isCorrect ? 'correct' : 'user'}`;
-    userMarker.style.left = `${userGuess.x}px`;
-    userMarker.style.top = `${userGuess.y}px`;
-    elements.mapOverlay.appendChild(userMarker);
-    
-    // Marcador correto (se errou)
-    if (!isCorrect) {
-        const correctMarker = document.createElement('div');
-        correctMarker.className = 'marker correct';
-        correctMarker.style.left = `${currentLocation.correctPosition.x}px`;
-        correctMarker.style.top = `${currentLocation.correctPosition.y}px`;
-        elements.mapOverlay.appendChild(correctMarker);
-    }
-    
-    // Configurar mensagem
-    if (isCorrect) {
-        elements.resultIcon.textContent = '🎉';
-        elements.resultTitle.textContent = 'Acertou!';
-        elements.resultMessage.innerHTML = `
-            <p>Você identificou corretamente:</p>
-            <h3>${currentLocation.name}</h3>
-            <p>+100 pontos!</p>
-        `;
-        elements.pointsEarned.textContent = '+100';
+    if (pointsEarned === 1000) {
+        elements.resultIcon.textContent = '🎯';
+        elements.resultTitle.textContent = 'NA MOSCA!';
+        elements.resultMessage.innerHTML = `<p>Local: <b>${currentLocation.name}</b></p><p>Perfeito!</p>`;
         elements.pointsEarned.style.color = '#00ff00';
+    } else if (pointsEarned > 0) {
+        elements.resultIcon.textContent = '👍';
+        elements.resultTitle.textContent = 'Foi Perto!';
+        elements.resultMessage.innerHTML = `<p>Local: <b>${currentLocation.name}</b></p><p>Erro: ${Math.round(distance)}m (aprox)</p>`;
+        elements.pointsEarned.style.color = '#ffff00';
     } else {
         elements.resultIcon.textContent = '❌';
-        elements.resultTitle.textContent = 'Que pena!';
-        elements.resultMessage.innerHTML = `
-            <p>Este local era:</p>
-            <h3>${currentLocation.name}</h3>
-            <p>Você errou por ${Math.round(distance)} pixels</p>
-        `;
-        elements.pointsEarned.textContent = '+0';
+        elements.resultTitle.textContent = 'Longe...';
+        elements.resultMessage.innerHTML = `<p>Local: <b>${currentLocation.name}</b></p><p>Não pontuou.</p>`;
         elements.pointsEarned.style.color = '#ff6b6b';
     }
     
+    elements.pointsEarned.textContent = `+${pointsEarned}`;
     elements.totalScore.textContent = gameConfig.score;
-    elements.nextRoundNumber.textContent = `${gameConfig.currentRound + 1}/${gameConfig.totalRounds}`;
+    elements.nextRoundNumber.textContent = `${Math.min(gameConfig.currentRound + 1, gameConfig.totalRounds)}/${gameConfig.totalRounds}`;
 }
 
 function nextRound() {
     gameConfig.currentRound++;
-    
     if (gameConfig.currentRound > gameConfig.totalRounds) {
         endGame();
     } else {
@@ -354,82 +374,39 @@ function nextRound() {
     }
 }
 
-// ===== FIM DO JOGO =====
 function endGame() {
     showScreen('gameOverScreen');
-    
-    // Atualizar informações finais
     elements.finalPlayerName.textContent = gameConfig.playerName;
     elements.finalPlayerSerie.textContent = gameConfig.playerSerie;
     elements.finalScore.textContent = gameConfig.score;
-    
-    // Determinar desempenho
-    const performance = getPerformance(gameConfig.score);
-    elements.performance.textContent = performance;
+    elements.performance.textContent = getPerformance(gameConfig.score);
 }
 
 function getPerformance(score) {
-    const maxScore = gameConfig.totalRounds * 100;
-    const percentage = (score / maxScore) * 100;
-    
-    if (percentage >= 80) return 'Incrível! 🏆';
-    if (percentage >= 60) return 'Muito Bom! ⭐';
-    if (percentage >= 40) return 'Bom! 👍';
-    return 'Continue praticando! 💪';
+    const max = gameConfig.totalRounds * 1000;
+    const pct = score / max;
+    if (pct >= 0.9) return 'Lendário! 👑';
+    if (pct >= 0.7) return 'Incrível! 🏆';
+    if (pct >= 0.5) return 'Muito Bom! ⭐';
+    if (pct >= 0.3) return 'Bom! 👍';
+    return 'Continue Treinando! 💪';
 }
 
 function playAgain() {
-    // Resetar jogo
     gameConfig.currentRound = 1;
     gameConfig.score = 0;
     usedLocations = [];
-    
     startRound();
 }
 
 function changePlayer() {
-    // Voltar para cadastro
+    if (currentTimer) clearInterval(currentTimer);
     showScreen('registrationScreen');
-    
-    // Limpar seleções
     elements.playerName.value = '';
     elements.playerYear.value = '';
     elements.playerClass.value = '';
     elements.playerClass.disabled = true;
-    
-    // Esconder informações
-    elements.selectedName.classList.add('hidden');
-    elements.selectedSerie.classList.add('hidden');
-    
     updateStartButton();
 }
 
-// Iniciar aplicação
 document.addEventListener('DOMContentLoaded', init);
-
-// ===== FUNÇÃO SAIR PARA O MENU =====
-function exitToMenu() {
-    if (confirm('Tem certeza que deseja sair? Seu progresso atual será perdido.')) {
-        // Parar timer se estiver rodando
-        if (currentTimer) {
-            clearInterval(currentTimer);
-            currentTimer = null;
-        }
-        
-        // Resetar jogo
-        gameConfig.currentRound = 1;
-        gameConfig.score = 0;
-        usedLocations = [];
-        userGuess = null;
-        
-        // Voltar para o menu
-        showScreen('registrationScreen');
-        
-        // Opcional: Manter dados do jogador ou limpar
-        // elements.playerName.value = gameConfig.playerName; // Manter nome
-        // elements.playerYear.value = ''; // Limpar seleções
-        // elements.playerClass.value = '';
-        // elements.playerClass.disabled = true;
-    }
-}
-

@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escola Guessr - Descubra o Local</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
   
     <div id="registrationScreen" class="screen active">
@@ -17,12 +15,10 @@
                     <h1>Escola Guessr</h1>
                     <p class="subtitle">Primeira Turma de DS - 2024</p>
                 </div>
-
                 <div class="form-group">
                     <label for="playerName">Seu Nome:</label>
                     <input type="text" id="playerName" placeholder="Digite seu nome completo" maxlength="20">
                 </div>
-
                 <div class="form-row">
                     <div class="form-group">
                         <label for="playerYear">Sua Série:</label>
@@ -33,7 +29,6 @@
                             <option value="3">3º Ano</option>
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label for="playerClass">Turma:</label>
                         <select id="playerClass" class="form-select">
@@ -49,55 +44,50 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="selected-info">
                     <div id="selectedName" class="hidden">👤 Nome: <span></span></div>
                     <div id="selectedSerie" class="hidden">🎓 Série: <span></span></div>
                 </div>
-
                 <button id="startGameBtn" class="start-btn disabled" disabled>🎯 Iniciar Jogo</button>
             </div>
         </div>
     </div>
 
     <div id="gameScreen" class="screen">
-        <div class="game-header">
-            <div class="player-display">
-                <span id="currentPlayerName"></span> - <span id="currentPlayerSerie"></span>
-            </div>
-            <div class="game-info">
-                <div class="timer">
-                    ⏱️ <span id="timer">30</span>s
-                </div>
-                <div class="score">
-                    🏆 <span id="score">0</span> pontos
-                </div>
-                <div class="round">
-                    📍 Rodada <span id="round">1</span>/5
-                </div>
+        <div class="panorama-container">
+            <img id="currentPhoto" src="" alt="Foto do local">
+            <div class="photo-overlay-instruction">
+                <p>Onde esta foto foi tirada?</p>
             </div>
         </div>
 
-        <div class="game-container">
-            
-            <div class="main-photo">
-                <img id="currentPhoto" src="" alt="Foto do local">
-                <div class="photo-overlay">
-                    <div class="instruction">Onde foi tirada esta foto?</div>
-                </div>
+        <div class="game-hud">
+            <div class="hud-item player-info">
+                👤 <span id="currentPlayerName"></span> (<span id="currentPlayerSerie"></span>)
             </div>
+            <div class="hud-item timer-info">
+                ⏱️ <span id="timer">30</span>s
+            </div>
+            <div class="hud-item score-info">
+                🏆 <span id="score">0</span> pts
+            </div>
+            <div class="hud-item round-info">
+                📍 <span id="round">1</span>/5
+            </div>
+        </div>
 
-          
-            <div class="mini-map">
-                <div class="map-header">
-                    <h4>🗺️ Clique no mapa</h4>
-                </div>
-                <div class="map-container">
-                    <img id="schoolMap" src="plantas/planta-escola.jpg" alt="Planta da Escola">
-                    <div class="map-overlay" id="mapOverlay"></div>
-                </div>
-                <button id="confirmGuess" class="confirm-btn">✅ Confirmar Palpite</button>
+        <div class="mini-map-wrapper" id="miniMapWrapper">
+            <div class="map-controls">
+                <h4>🗺️ Mapa</h4>
+                <button id="toggleMapBtn" class="toggle-map-btn" title="Expandir Mapa">🔍</button>
             </div>
+            
+            <div class="map-container">
+                <img id="schoolMap" src="Imagens/PlantaBaixaAnhanguera.png" alt="Planta da Escola">
+                <div class="map-overlay" id="mapOverlay"></div>
+            </div>
+            
+            <button id="confirmGuess" class="confirm-btn">✅ Confirmar</button>
         </div>
     </div>
 
@@ -107,7 +97,6 @@
                 <div id="resultIcon" class="result-icon">🎯</div>
                 <h2 id="resultTitle">Resultado</h2>
                 <div id="resultMessage" class="result-message"></div>
-
                 <div class="round-stats">
                     <div class="stat">
                         <span class="stat-label">Pontos Ganhos:</span>
@@ -122,7 +111,6 @@
                         <span id="nextRoundNumber" class="stat-value">2/5</span>
                     </div>
                 </div>
-
                 <button id="nextRoundBtn" class="next-round-btn">🎯 Próxima Rodada →</button>
             </div>
         </div>
@@ -133,7 +121,6 @@
             <div class="game-over-card">
                 <div class="trophy">🏆</div>
                 <h1>Jogo Concluído!</h1>
-
                 <div class="final-stats">
                     <div class="final-stat">
                         <span class="final-label">Jogador:</span>
@@ -152,7 +139,6 @@
                         <span id="performance" class="final-value">Incrível!</span>
                     </div>
                 </div>
-
                 <div class="final-actions">
                     <button id="playAgainBtn" class="play-again-btn">🔄 Jogar Novamente</button>
                     <button id="changePlayerBtn" class="change-player-btn">👥 Trocar Jogador</button>
@@ -163,5 +149,4 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>
