@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anhanguera Guessr - Descubra o Local</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -46,12 +47,41 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-row" style="margin-top:8px;">
+                    <div class="form-group">
+                        <label for="difficultySelect">Dificuldade:</label>
+                        <select id="difficultySelect" class="form-select">
+                            <option value="medium">Médio</option>
+                            <option value="easy">Fácil</option>
+                            <option value="hard">Difícil</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="selected-info">
                     <div id="selectedName" class="hidden">👤 Nome: <span></span></div>
                     <div id="selectedSerie" class="hidden">🎓 Série: <span></span></div>
                 </div>
                 <button id="startGameBtn" class="start-btn disabled" disabled>🎯 Iniciar Jogo</button>
+                <label style="display:block; margin-top:8px; font-size:0.9em;"><input id="practiceModeCheckbox" type="checkbox" style="margin-right:8px;"> Modo Prática (2 rodadas)</label>
                 <button id="openLeaderboardBtn" class="start-btn" style="margin-top:10px; background:#ffd166; color:#000;">🏆 Ver Ranking</button>
+                <button id="openTutorialBtn" class="start-btn" style="margin-top:10px; background:#00c2ff; color:#000;">💡 Ver Tutorial</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial Modal -->
+    <div id="tutorialModal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <h2>Bem-vindo ao Anhanguera Guessr 👋</h2>
+            <p>Você verá 5 fotos e deve adivinhar em qual local da planta as fotos foram tiradas.</p>
+            <ul>
+                <li>Use o mapa no canto inferior direito para clicar e confirmar sua escolha.</li>
+                <li>Você tem 30 segundos por rodada.</li>
+                <li>Pontuação é maior quanto mais próximo você estiver do local certo.</li>
+            </ul>
+            <div class="modal-actions">
+                <label><input type="checkbox" id="dontShowTutorial"> Não mostrar novamente</label>
+                <button id="closeTutorialBtn" class="play-again-btn">Começar</button>
             </div>
         </div>
     </div>
@@ -69,12 +99,26 @@
         <div class="game-hud">
             <div class="hud-item player-info">
                 👤 <span id="currentPlayerName"></span> (<span id="currentPlayerSerie"></span>)
+                <span id="modeIndicator" style="margin-left:8px; font-size:0.9em; color:#ffd166; display:none;">[Prática]</span>
             </div>
             <div class="hud-item timer-info">
                 ⏱️ <span id="timer">30</span>s
+                <!-- Circular timer SVG -->
+                <svg id="timerRing" width="28" height="28" viewBox="0 0 36 36" style="vertical-align:middle; margin-left:8px;">
+                    <path stroke="#444" stroke-width="3.5" fill="none" d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                    <path id="timerRingProgress" stroke="#00ff00" stroke-width="3.5" fill="none" stroke-dasharray="100,100" d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                </svg>
             </div>
             <div class="hud-item score-info">
                 🏆 <span id="score">0</span> pts
+            </div>
+            <div class="hud-item audio-controls">
+                🔊 <button id="muteBtn" title="Mudo">🔈</button>
+                <input id="volumeSlider" type="range" min="0" max="1" step="0.05" value="1" style="width:100px; margin-left:8px;">
             </div>
             <div class="hud-item round-info">
                 📍 <span id="round">1</span>/5
@@ -89,8 +133,11 @@
             <div class="map-container">
                 <img id="schoolMap" src="Imagens/PlantaBaixaAnhanguera.png" alt="Planta da Escola">
                 <div class="map-overlay" id="mapOverlay"></div>
-            </div>
-            
+                    <div class="mini-map-controls" style="position:absolute; right:10px; bottom:8px; align-items:center;">
+                        <button id="revealZoneBtn" class="confirm-btn" title="Revelar área (2 vezes)" style="background:#ffd166;">🔎</button>
+                        <span id="revealCount" style="color:#fff; font-weight:700; margin-left:6px;">2/2</span>
+                    </div>
+                </div>
             <button id="confirmGuess" class="confirm-btn">✅ Confirmar</button>
         </div>
     </div>
@@ -151,6 +198,7 @@
                     <button id="playAgainBtn" class="play-again-btn">🔄 Jogar Novamente</button>
                     <button id="backToMenuBtn" class="change-player-btn">🏠 Voltar ao Menu</button>
                     <button id="saveToLeaderboardBtn" class="start-btn" style="margin-top:10px; background:#ffd166; color:#000;">💾 Salvar no Ranking</button>
+                    <button id="copyResultBtn" class="change-player-btn" style="margin-top:10px;">📋 Copiar Resultado</button>
                 </div>
             </div>
         </div>
@@ -161,12 +209,19 @@
         <div class="leaderboard-container">
             <div class="leaderboard-card">
                 <h1>🏆 Ranking - Top 10</h1>
+                <div class="leaderboard-filters" style="display:flex; gap:10px; margin-bottom:12px; align-items:center;">
+                    <select id="filterYear"><option value="">Todas as Séries</option><option value="1">1º Ano</option><option value="2">2º Ano</option><option value="3">3º Ano</option></select>
+                    <select id="filterClass"><option value="">Todas as Turmas</option><option value="A">A</option><option value="A ADM">A ADM</option><option value="B">B</option><option value="B DS">B DS</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option></select>
+                        <select id="filterDifficulty"><option value="">Todas as Dificuldades</option><option value="easy">Fácil</option><option value="medium">Médio</option><option value="hard">Difícil</option></select>
+                        <button id="clearFiltersBtn" class="change-player-btn" style="flex: 0 0 auto;">✖ Limpar</button>
+                </div>
                 <table id="leaderboardTable" class="leaderboard-table">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Jogador</th>
                             <th>Série</th>
+                            <th>Dificuldade</th>
                             <th>Pontos</th>
                             <th>Data</th>
                         </tr>
@@ -176,6 +231,7 @@
                 </table>
                 <div class="leaderboard-actions">
                     <button id="exportLeaderboardBtn" class="change-player-btn">⬇️ Exportar JSON</button>
+                    <button id="exportLeaderboardCSVBtn" class="change-player-btn">⬇️ Exportar CSV</button>
                     <button id="importLeaderboardBtn" class="change-player-btn">⬆️ Importar JSON</button>
                     <input id="importJsonInput" type="file" accept="application/json" style="display:none;" />
                     <label style="display:flex; align-items:center; gap:8px;" title="Baixa automaticamente um arquivo JSON com o ranking sempre que você salvar">
@@ -183,11 +239,16 @@
                     </label>
                     <button id="clearLeaderboardBtn" class="change-player-btn">🧹 Limpar Ranking</button>
                     <button id="closeLeaderboardBtn" class="play-again-btn">↩️ Voltar</button>
+                    <button id="copyLeaderboardBtn" class="change-player-btn">📋 Copiar CSV</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="script.js"></script>
+    <!-- Confetti container -->
+    <div class="confetti-container" id="confettiContainer"></div>
+    <!-- Toast container -->
+    <div id="toastContainer" aria-live="polite" style="position:fixed;top:16px;right:16px;z-index:99999;"></div>
 </body>
 </html>
