@@ -15,7 +15,7 @@
             <div class="registration-card">
                 <div class="logo-container">
                     <h1>Anhanguera Guessr</h1>
-                    <p class="subtitle">Primeira Turma de DS - 2024</p>
+                    <p class="subtitle">Primeira Turma de DS - 2024/2025</p>
                 </div>
                 <div class="form-group">
                     <label for="playerName">Seu Nome:</label>
@@ -51,6 +51,7 @@
                     <div id="selectedSerie" class="hidden">🎓 Série: <span></span></div>
                 </div>
                 <button id="startGameBtn" class="start-btn disabled" disabled>🎯 Iniciar Jogo</button>
+                <button id="openLeaderboardBtn" class="start-btn" style="margin-top:10px; background:#ffd166; color:#000;">🏆 Ver Ranking</button>
             </div>
         </div>
     </div>
@@ -141,10 +142,47 @@
                         <span class="final-label">Desempenho:</span>
                         <span id="performance" class="final-value">Incrível!</span>
                     </div>
+                    <div class="final-stat">
+                        <span class="final-label">Posição no Ranking:</span>
+                        <span id="finalPlayerRank" class="final-value">-</span>
+                    </div>
                 </div>
                 <div class="final-actions">
                     <button id="playAgainBtn" class="play-again-btn">🔄 Jogar Novamente</button>
                     <button id="backToMenuBtn" class="change-player-btn">🏠 Voltar ao Menu</button>
+                    <button id="saveToLeaderboardBtn" class="start-btn" style="margin-top:10px; background:#ffd166; color:#000;">💾 Salvar no Ranking</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela do Ranking -->
+    <div id="leaderboardScreen" class="screen">
+        <div class="leaderboard-container">
+            <div class="leaderboard-card">
+                <h1>🏆 Ranking - Top 10</h1>
+                <table id="leaderboardTable" class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Jogador</th>
+                            <th>Série</th>
+                            <th>Pontos</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="leaderboard-actions">
+                    <button id="exportLeaderboardBtn" class="change-player-btn">⬇️ Exportar JSON</button>
+                    <button id="importLeaderboardBtn" class="change-player-btn">⬆️ Importar JSON</button>
+                    <input id="importJsonInput" type="file" accept="application/json" style="display:none;" />
+                    <label style="display:flex; align-items:center; gap:8px;" title="Baixa automaticamente um arquivo JSON com o ranking sempre que você salvar">
+                        <input type="checkbox" id="autoBackupCheckbox"> Auto–backup (JSON)
+                    </label>
+                    <button id="clearLeaderboardBtn" class="change-player-btn">🧹 Limpar Ranking</button>
+                    <button id="closeLeaderboardBtn" class="play-again-btn">↩️ Voltar</button>
                 </div>
             </div>
         </div>

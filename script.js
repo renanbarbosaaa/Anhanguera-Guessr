@@ -95,13 +95,29 @@ const elements = {
     finalPlayerSerie: document.getElementById('finalPlayerSerie'),
     finalScore: document.getElementById('finalScore'),
     performance: document.getElementById('performance'),
+    finalPlayerRank: document.getElementById('finalPlayerRank'),
     playAgainBtn: document.getElementById('playAgainBtn'),
     backToMenuBtn: document.getElementById('backToMenuBtn') // Botão Menu Final
+    ,
+    openLeaderboardBtn: document.getElementById('openLeaderboardBtn'),
+    leaderboardScreen: document.getElementById('leaderboardScreen'),
+    leaderboardTable: document.getElementById('leaderboardTable'),
+    closeLeaderboardBtn: document.getElementById('closeLeaderboardBtn'),
+    clearLeaderboardBtn: document.getElementById('clearLeaderboardBtn'),
+    exportLeaderboardBtn: document.getElementById('exportLeaderboardBtn'),
+    importLeaderboardBtn: document.getElementById('importLeaderboardBtn'),
+    importJsonInput: document.getElementById('importJsonInput'),
+    autoBackupCheckbox: document.getElementById('autoBackupCheckbox'),
+    saveToLeaderboardBtn: document.getElementById('saveToLeaderboardBtn')
 };
 
 function init() {
     setupEventListeners();
     showScreen('registrationScreen');
+
+    // Restore auto-backup checkbox state
+    const auto = localStorage.getItem('leaderboard_auto_backup');
+    if (auto && elements.autoBackupCheckbox) elements.autoBackupCheckbox.checked = auto === '1';
 }
 
 function setupEventListeners() {
@@ -114,6 +130,18 @@ function setupEventListeners() {
     elements.schoolMap.addEventListener('click', handleMapClick); 
     elements.confirmGuess.addEventListener('click', confirmGuess);
     elements.exitGameBtn.addEventListener('click', exitToMenu);
+    elements.openLeaderboardBtn.addEventListener('click', () => { displayLeaderboard(); showScreen('leaderboardScreen'); });
+    elements.closeLeaderboardBtn.addEventListener('click', () => showScreen('registrationScreen'));
+    elements.clearLeaderboardBtn.addEventListener('click', clearLeaderboard);
+    elements.exportLeaderboardBtn.addEventListener('click', exportLeaderboard);
+    elements.importLeaderboardBtn.addEventListener('click', () => elements.importJsonInput.click());
+    elements.importJsonInput.addEventListener('change', importLeaderboardFromFile);
+    elements.autoBackupCheckbox.addEventListener('change', (e) => {
+        localStorage.setItem('leaderboard_auto_backup', e.target.checked ? '1' : '0');
+    });
+    elements.saveToLeaderboardBtn.addEventListener('click', () => {
+        if (!elements.saveToLeaderboardBtn.disabled) savePlayerScore();
+    });
     
     // Navegação
     elements.nextRoundBtn.addEventListener('click', nextRound);
@@ -161,7 +189,8 @@ function startGame() {
     
     elements.currentPlayerName.textContent = gameConfig.playerName;
     elements.currentPlayerSerie.textContent = gameConfig.playerSerie;
-    
+    // Permite salvar o score novamente nesta nova sessão
+    savedThisSession = false;
     startRound();
 }
 
@@ -332,6 +361,173 @@ function endGame() {
     elements.finalPlayerSerie.textContent = gameConfig.playerSerie;
     elements.finalScore.textContent = gameConfig.score;
     elements.performance.textContent = getPerformance(gameConfig.score);
+
+    // Reset save button state
+    elements.saveToLeaderboardBtn.disabled = false;
+    elements.saveToLeaderboardBtn.textContent = '💾 Salvar no Ranking';
+
+    // Mostra a posição projetada no ranking (se fosse salvo agora)
+    const projected = getProjectedPosition(gameConfig.score);
+    if (projected <= LEADERBOARD_MAX) elements.finalPlayerRank.textContent = `#${projected}`;
+    else elements.finalPlayerRank.textContent = `Fora do Top ${LEADERBOARD_MAX}`;
+}
+
+/* ======= RANKING / LEADERBOARD ======= */
+const LEADERBOARD_KEY = 'anhanguera_guessr_leaderboard_v1';
+const LEADERBOARD_MAX = 10;
+let savedThisSession = false;
+
+function getLeaderboard() {
+    try {
+        const raw = localStorage.getItem(LEADERBOARD_KEY);
+        if (!raw) return [];
+        return JSON.parse(raw);
+    } catch (e) {
+        console.error('Erro ao ler o leaderboard', e);
+        return [];
+    }
+}
+
+function saveLeaderboard(list) {
+    try {
+        localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(list));
+    } catch (e) {
+        console.error('Erro ao salvar o leaderboard', e);
+    }
+}
+
+function formatDateISOToShort(isoString) {
+    const d = new Date(isoString);
+    return d.toLocaleString();
+}
+
+function savePlayerScore() {
+    if (savedThisSession) return;
+    const lb = getLeaderboard();
+    const entry = {
+        name: gameConfig.playerName || 'Anônimo',
+        serie: gameConfig.playerSerie || '',
+        score: gameConfig.score || 0,
+        date: new Date().toISOString()
+    };
+    lb.push(entry);
+    // Ordena desc por score, se empate -> por data (mais recente na frente)
+    lb.sort((a, b) => {
+        if (b.score === a.score) return new Date(b.date) - new Date(a.date);
+        return b.score - a.score;
+    });
+    const trimmed = lb.slice(0, LEADERBOARD_MAX);
+    saveLeaderboard(trimmed);
+    savedThisSession = true;
+    elements.saveToLeaderboardBtn.disabled = true;
+    elements.saveToLeaderboardBtn.textContent = '✅ Salvo!';
+    // Mostrar posição ao jogador
+    const position = trimmed.findIndex(e => e.name === entry.name && e.score === entry.score && e.date === entry.date) + 1;
+    if (position > 0) {
+        alert(`Score salvo! Você ficou na posição #${position}.`);
+    } else {
+        alert('Score salvo!');
+    }
+    // Atualiza tabela do leaderboard caso esteja aberta
+    displayLeaderboard();
+    // Se o auto-backup está ativo, exporta o JSON automaticamente
+    try {
+        const auto = localStorage.getItem('leaderboard_auto_backup');
+        if (auto === '1') exportLeaderboard();
+    } catch (e) {
+        console.warn('Falha ao ler configuração de auto-backup', e);
+    }
+}
+
+function displayLeaderboard() {
+    const lb = getLeaderboard();
+    const tbody = elements.leaderboardTable.querySelector('tbody');
+    tbody.innerHTML = '';
+    if (!lb || lb.length === 0) {
+        const tr = document.createElement('tr');
+        const td = document.createElement('td');
+        td.colSpan = 5;
+        td.textContent = 'Nenhum registro ainda. Jogue e salve sua pontuação!';
+        td.style.textAlign = 'center';
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+        return;
+    }
+    lb.forEach((entry, index) => {
+        const tr = document.createElement('tr');
+        if (index === 0) tr.classList.add('top');
+        const tdRank = document.createElement('td'); tdRank.className = 'rank'; tdRank.textContent = index + 1;
+        const tdName = document.createElement('td'); tdName.textContent = entry.name;
+        const tdSerie = document.createElement('td'); tdSerie.textContent = entry.serie || '-';
+        const tdPoints = document.createElement('td'); tdPoints.className = 'points'; tdPoints.textContent = entry.score;
+        const tdDate = document.createElement('td'); tdDate.className = 'date'; tdDate.textContent = formatDateISOToShort(entry.date);
+        tr.appendChild(tdRank); tr.appendChild(tdName); tr.appendChild(tdSerie); tr.appendChild(tdPoints); tr.appendChild(tdDate);
+        // For mobile friendly show labels
+        tdRank.setAttribute('data-label', '#');
+        tdName.setAttribute('data-label', 'Jogador');
+        tdSerie.setAttribute('data-label', 'Série');
+        tdPoints.setAttribute('data-label', 'Pontos');
+        tdDate.setAttribute('data-label', 'Data');
+        tbody.appendChild(tr);
+    });
+}
+
+function getProjectedPosition(score) {
+    const lb = getLeaderboard();
+    const higher = lb.filter(e => e.score > score).length;
+    // Position is after those higher scores; ties will consider new entry to be more recent => goes immediately after higher.
+    return higher + 1;
+}
+
+function clearLeaderboard() {
+    if (!confirm('Tem certeza que deseja limpar o ranking? Esta ação não pode ser desfeita.')) return;
+    localStorage.removeItem(LEADERBOARD_KEY);
+    displayLeaderboard();
+}
+
+function exportLeaderboard() {
+    const lb = getLeaderboard();
+    const dataStr = JSON.stringify(lb, null, 2);
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const filename = `anhanguera_guessr_leaderboard_${new Date().toISOString().slice(0,10)}.json`;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+function importLeaderboardFromFile(event) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try {
+            const json = JSON.parse(e.target.result);
+            if (!Array.isArray(json)) throw new Error('JSON inválido: esperado um array');
+            // Basic validation: entries must have name, score, date
+            const isValid = json.every(item => typeof item.name === 'string' && typeof item.score === 'number' && typeof item.date === 'string');
+            if (!isValid) throw new Error('Formato inválido: cada entrada deve ter name (string), score (number) e date (ISO string)');
+            if (!confirm('Deseja substituir o ranking atual pelos dados do arquivo importado?')) return;
+            // Sort and trim to top
+            json.sort((a, b) => {
+                if (b.score === a.score) return new Date(b.date) - new Date(a.date);
+                return b.score - a.score;
+            });
+            const trimmed = json.slice(0, LEADERBOARD_MAX);
+            saveLeaderboard(trimmed);
+            displayLeaderboard();
+            alert('Ranking importado com sucesso!');
+        } catch (err) {
+            alert('Falha ao importar o arquivo JSON: ' + err.message);
+        }
+    };
+    reader.readAsText(file);
+    // Reset input so same file can be chosen again later
+    event.target.value = null;
 }
 
 function getPerformance(score) {
@@ -370,6 +566,7 @@ function exitToMenu() {
         elements.selectedName.classList.add('hidden');
         elements.selectedSerie.classList.add('hidden');
         elements.startGameBtn.disabled = true;
+        savedThisSession = false;
         
         showScreen('registrationScreen');
     }
